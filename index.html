@@ -29,6 +29,11 @@
 
 <body id="top">
 
+  <audio id="background-music" src="nikmatiperjalanan.mp3" type="audio/mp3" autoplay loop></audio>
+
+  <div class="button-container">
+    <button style="background-image: url(./assets/images/play.png);" class="play-pause-btn" onclick="togglePlay(this)"></button>
+</div>
   <!-- 
     - #HEADER
   -->
@@ -43,7 +48,7 @@
           <li class="contact-item">
             <ion-icon name="mail-outline"></ion-icon>
 
-            <a href="mailto:info@example.com" class="contact-link">info@example.com</a>
+            <a href="mailto:info@example.com" class="contact-link">ghinasalsas@gmail.com</a>
           </li>
 
           <li class="contact-item">
@@ -88,7 +93,7 @@
     <div class="header-bottom" data-header>
       <div class="container">
 
-        <a href="#" class="logo">Dentelo.</a>
+        <a href="#" class="logo">Salsa Journey.</a>
 
         <nav class="navbar container" data-navbar>
           <ul class="navbar-list">
@@ -116,7 +121,7 @@
           </ul>
         </nav>
 
-        <a href="#" class="btn">Book appointment</a>
+        <a href="#" class="btn">Soon tobe Official Website</a>
 
         <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
           <ion-icon name="menu-sharp" aria-hidden="true" class="menu-icon"></ion-icon>
@@ -145,34 +150,141 @@
 
           <div class="hero-content">
 
-            <p class="section-subtitle">Welcome To Dentelo</p>
+            <p class="section-subtitle">Selamat Atas Gelar Barunya</p>
 
-            <h1 class="h1 hero-title">We Are Best Dental Service</h1>
-
+            <h1 class="h1 hero-title">drg. Ghina Salsabila, S.KG</h1>
+            <!-- <div class="quote-container">
+              <p class="quote-text">"Selamat atas pencapaian luar biasa ini! Selamat atas gelar Dokter Gigi yang telah diraih! Perjalanan panjang dan kerja kerasmu akhirnya membuahkan hasil. Semoga sukses selalu menyertaimu dalam setiap langkah karirmu dan selalu diberkati dengan keberhasilan serta kebahagiaan dalam menjalani profesi mulia ini. Kami bangga padamu!"</p>
+              <p class="quote-author">- Steve Jobs</p>
+            </div> -->
             <p class="hero-text">
-              Donec vitae libero non enim placerat eleifend aliquam erat volutpat. Curabitur diam ex, dapibus purus
-              sapien, cursus sed
-              nisl tristique, commodo gravida lectus non.
+              "Selamat atas pencapaian luar biasa ini! Selamat atas gelar Dokter Gigi yang telah diraih! Perjalanan panjang dan kerja kerasmu akhirnya membuahkan hasil. Semoga sukses selalu menyertaimu dalam setiap langkah karirmu dan selalu diberkati dengan keberhasilan serta kebahagiaan dalam menjalani profesi mulia ini. Kami bangga padamu!"
             </p>
 
-            <form action="" class="hero-form">
-              <input type="email" name="email_address" aria-label="email" placeholder="Your Email Address..." required
+            <form action="" class="hero-form" id="messageForm">
+              <input type="text" id="name" name="name" style="margin-bottom: 10px;" placeholder="Isikan nama kamu..." required
                 class="email-field">
-
-              <button type="submit" class="btn">Get Call Back</button>
+              <input type="text" id="message" name="message" style="margin-bottom: 10px;" placeholder="Tulis ucapan dan doa..." required
+                class="email-field">
+                <button type="submit" class="btn" id="submit">Kirim Doa Terbaik Kamu</button>
             </form>
+
+            <script>
+              document.getElementById("messageForm").addEventListener("submit", function(event) {
+                  event.preventDefault();
+                  var name = document.getElementById("name").value;
+                  var message = document.getElementById("message").value;
+                  var url = "https://api.telegram.org/bot7137553258:AAG11zgRvStTzEmcn9mvolFYem2JNNecx8w/sendMessage?chat_id=@wishesalsa&text=" + encodeURIComponent("Dari : " + name + "\nWishes : " + message);
+      
+                  var xhr = new XMLHttpRequest();
+                  xhr.open("GET", url);
+                  xhr.send();
+      
+                  alert("Thanks Greetings, "+name+".\nMessage sent to Telegram!");
+              });
+          </script>
+           <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+            import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyBIz7T0XeCZQRMT7wLoVMzQ2Gk7wUUy3pk",
+              authDomain: "wishesalsa.firebaseapp.com",
+              databaseURL: "https://wishesalsa-default-rtdb.firebaseio.com",
+              projectId: "wishesalsa",
+              storageBucket: "wishesalsa.appspot.com",
+              messagingSenderId: "927435115263",
+              appId: "1:927435115263:web:285317ca67a067da991aca"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+
+            //get ref to database
+            const db = getDatabase(app);
+            document.getElementById("messageForm").addEventListener("submit", function(e) {
+              e.preventDefault();
+              // const datetime = new Date().toLocaleString("id-ID")
+              const datetime = new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
+              set(ref(db, "wishes/" + document.getElementById("name").value),
+              {
+                name: document.getElementById("name").value,
+                message: document.getElementById("message").value,
+                datetime: datetime
+              });
+              location.reload();
+            })
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, `wishes/`)).then((snapshot) => {
+              if (snapshot.exists()) {
+                const messages = snapshot.val();
+                console.log(messages)
+                const messageList = document.getElementById('message-list');
+                messageList.innerHTML = ''; // Clear existing messages
+
+                // Convert messages object to an array and sort by datetime
+                const sortedMessages = Object.entries(messages).sort((a, b) => {
+                    return new Date(b[1].datetime) - new Date(a[1].datetime);
+                });
+
+                // Display sorted messages
+                sortedMessages.forEach(([key, message]) => {
+                    const messageItem = document.createElement('li');
+                    const date = new Date(message.datetime.slice(0, 19));
+                    const timeAgoString = timeAgo(date); // Assuming timeAgo is a function that converts date to relative time
+                    messageItem.innerHTML = `
+                        <div class="container-chat">
+                            <img src="./assets/images/user2.png" width="50" height="50" alt="Avatar"> 
+                            <strong>${message.name}</strong><br>
+                            <p style="margin-left: 70px; margin-top:5px; word-wrap: break-word; overflow-wrap: break-word; text-align: justify;">
+                                ${message.message}
+                            </p>
+                            <span class="time-right">${timeAgoString}</span>
+                        </div>
+                    `;
+                    messageList.appendChild(messageItem);
+                });
+            } else {
+                console.log("No data available");
+            }
+            }).catch((error) => {
+              console.error(error);
+            });          
+
+          </script>
+      
 
           </div>
 
           <figure class="hero-banner">
-            <img src="./assets/images/hero-banner.png" width="587" height="839" alt="hero banner" class="w-100">
+            <img src="./assets/images/Profesional-Photo.png" width="587" height="839" alt="hero banner" class="w-100">
           </figure>
 
         </div>
       </section>
 
 
+      <section class="section cta" aria-label="cta">
+        <div class="container">
+            <div class="cta-content">
 
+              <p class="section-subtitle">Thanku for your Greetings</p>
+    
+              <h2 class="h2 section-title">Graduation Wish to drg. Ghina</h2>
+    
+              <a href="#name" class="btn">Belum ucapin ? Klik ini yah.</a>
+    
+            </div>
+            <div class="cta-banner">
+              <ul id="message-list" style="margin-top: 100px; height: 300px;; overflow:auto;"></ul>
+            </div>
+
+        </div>
+      </section>
 
 
       <!-- 
@@ -184,7 +296,7 @@
 
           <p class="section-subtitle text-center">Our Services</p>
 
-          <h2 class="h2 section-title text-center">What We Provide</h2>
+          <h2 class="h2 section-title text-center">My Impression of this</h2>
 
           <ul class="service-list">
 
@@ -197,10 +309,12 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Root Canal</h3>
+                  <div class="card-badge">
+                  <h3 class="h3 card-title">Ilmu Penyakit Mulut<span class="badge">9/10</span></h3>
+                  </div>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Penyakitnya banyak banget dan harus dihapalin semuanya tapi seru tebak-tebakan.
                   </p>
                 </div>
 
@@ -216,10 +330,10 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Alignment Teeth</h3>
+                  <h3 class="h3 card-title">Dental Public Health<span class="badge">7/10</span></h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Hapalannya dikit tapi harus bisa pede karena kebanyakan pake bahasa sendiri kaya penyuluhan gitu bukan hapalan jadinya.
                   </p>
                 </div>
 
@@ -235,16 +349,35 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Cosmetic Teeth</h3>
+                  <h3 class="h3 card-title">Ortodonsia<span class="badge">8/10</span></h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Harus pake logika bukan dihapal,teorinya sedikit.
                   </p>
                 </div>
 
               </div>
             </li>
 
+            <li>
+              <div class="service-card">
+
+                <div class="card-icon">
+                  <img src="./assets/images/service-icon-1.png" width="100" height="100" loading="lazy"
+                    alt="service icon" class="w-100">
+                </div>
+
+                <div>
+                  <h3 class="h3 card-title">Prostodonsia<span class="badge">6/10</span></h3>
+
+                  <p class="card-text">
+                    Gasuka pokoknya,ngga ngerti.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+            
             <li class="service-banner">
               <figure>
                 <img src="./assets/images/service-banner.png" width="409" height="467" loading="lazy"
@@ -261,10 +394,10 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Oral Hygiene</h3>
+                  <h3 class="h3 card-title">Konservasi<span class="badge">9/10</span></h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Gampang tapi harus teliti kalau ngerjain pasiennya.
                   </p>
                 </div>
 
@@ -280,10 +413,10 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Live Advisory</h3>
+                  <h3 class="h3 card-title">Ilmu Bedah Mulut<span class="badge">8/10</span></h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Materinya sedikit dan gampang tapi takut praktekinnya.
                   </p>
                 </div>
 
@@ -299,10 +432,33 @@
                 </div>
 
                 <div>
-                  <h3 class="h3 card-title">Cavity Inspection</h3>
+                  <h3 class="h3 card-title">Pedodonsia<span class="badge">9/10</span></h3>
 
                   <p class="card-text">
-                    Aenean eleifend turpis tellus, nec laoreet metus elementum ac.
+                    Materinya sedikit tapi prakteknya harus sabar-sabar karena ngadepin anak kecil.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              
+            </li>
+
+            <li>
+              <div class="service-card">
+
+                <div class="card-icon">
+                  <img src="./assets/images/service-icon-1.png" width="100" height="100" loading="lazy"
+                    alt="service icon" class="w-100">
+                </div>
+
+                <div>
+                  <h3 class="h3 card-title">Periodonsia<span class="badge">8/10</span></h3>
+
+                  <p class="card-text">
+                    Materinya gampang tapi dosennya galak.
                   </p>
                 </div>
 
@@ -326,7 +482,7 @@
         <div class="container">
 
           <figure class="about-banner">
-            <img src="./assets/images/about-banner.png" width="470" height="538" loading="lazy" alt="about banner"
+            <img src="./assets/images/about-banner-salsa-2.png" width="470" height="538" loading="lazy" alt="about banner"
               class="w-100">
           </figure>
 
@@ -366,9 +522,9 @@
       <section class="section doctor" aria-label="doctor">
         <div class="container">
 
-          <p class="section-subtitle text-center">Our Doctor</p>
+          <p class="section-subtitle text-center">Our Wishes</p>
 
-          <h2 class="h2 section-title text-center">Best Expert Dentist</h2>
+          <h2 class="h2 section-title text-center">Best Person in Your Life </h2>
 
           <ul class="has-scrollbar">
 
@@ -376,33 +532,25 @@
               <div class="doctor-card">
 
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
-                  <img src="./assets/images/doctor-1.png" width="460" height="500" loading="lazy" alt="Howard Holmes"
+                  <img src="./assets/images/doctor-1.png" width="460" height="500" loading="lazy" alt="Vincent Cooper"
                     class="img-cover">
+                  <div class="wishes">
+                    <video src="./video/video1.mp4" controls="true"></video>
+                    <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                  </div>
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Howard Holmes</a>
+                  <a onclick="toggle(event);" class="card-title">Ayah & Bunda</a>
                 </h3>
 
-                <p class="card-subtitle">Dentist</p>
+                <p class="card-subtitle">Orang Tua Tercinta</p>
 
                 <ul class="card-social-list">
 
                   <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-instagram"></ion-icon>
+                    <a onclick="toggle(event);" class="btn">Watch Video
+                      <!-- <ion-icon name="logo-youtube"></ion-icon> -->
                     </a>
                   </li>
 
@@ -417,31 +565,22 @@
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
                   <img src="./assets/images/doctor-2.png" width="460" height="500" loading="lazy" alt="Ella Thompson"
                     class="img-cover">
+                    <div class="wishes">
+                      <video src="./video/video2.mp4" controls="true"></video>
+                      <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                    </div>
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Ella Thompson</a>
+                  <a onclick="toggle(event);" class="card-title">Tasya, Nasuha, Syifa</a>
                 </h3>
 
-                <p class="card-subtitle">Dentist</p>
+                <p class="card-subtitle">Adik Tercantik</p>
 
                 <ul class="card-social-list">
 
                   <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-instagram"></ion-icon>
+                    <a onclick="toggle(event);" class="btn">Watch Video
                     </a>
                   </li>
 
@@ -456,31 +595,22 @@
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
                   <img src="./assets/images/doctor-3.png" width="460" height="500" loading="lazy" alt="Vincent Cooper"
                     class="img-cover">
+                    <div class="wishes">
+                      <video src="./video/video3.mp4" controls="true"></video>
+                      <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                    </div>
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Vincent Cooper</a>
+                  <a onclick="toggle(event);" class="card-title">Laras, Fakya, Rani</a>
                 </h3>
 
-                <p class="card-subtitle">Dentist</p>
+                <p class="card-subtitle">Teman Seperjuangan</p>
 
                 <ul class="card-social-list">
 
                   <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-instagram"></ion-icon>
+                    <a onclick="toggle(event);" class="btn">Watch Video
                     </a>
                   </li>
 
@@ -495,31 +625,22 @@
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
                   <img src="./assets/images/doctor-4.png" width="460" height="500" loading="lazy" alt="Danielle Bryant"
                     class="img-cover">
+                    <div class="wishes">
+                      <video src="./video/video4.mp4" controls="true"></video>
+                      <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                    </div>
                 </div>
 
                 <h3 class="h3">
-                  <a href="#" class="card-title">Danielle Bryant</a>
+                  <a onclick="toggle(event);" class="card-title">Alam Wahyu</a>
                 </h3>
 
-                <p class="card-subtitle">Dentist</p>
+                <p class="card-subtitle">Temen Baik</p>
 
                 <ul class="card-social-list">
 
                   <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#" class="card-social-link">
-                      <ion-icon name="logo-instagram"></ion-icon>
+                    <a onclick="toggle(event);" class="btn">Watch Video
                     </a>
                   </li>
 
@@ -545,7 +666,7 @@
         <div class="container">
 
           <figure class="cta-banner">
-            <img src="./assets/images/cta-banner.png" width="1056" height="1076" loading="lazy" alt="cta banner"
+            <img src="./assets/images/cta-banner-salsa.png" width="1056" height="1076" loading="lazy" alt="cta banner"
               class="w-100">
           </figure>
 
@@ -573,7 +694,7 @@
       <section class="section blog" id="blog" aria-label="blog">
         <div class="container">
 
-          <p class="section-subtitle text-center">Our Blog</p>
+          <p class="section-subtitle text-center">My Career Journey</p>
 
           <h2 class="h2 section-title text-center">Latest Blog & News</h2>
 
@@ -589,14 +710,14 @@
                   <div class="card-badge">
                     <ion-icon name="calendar-outline"></ion-icon>
 
-                    <time class="time" datetime="2022-03-24">24th March 2022</time>
+                    <time class="time" datetime="2022-03-24">19th August 2021</time>
                   </div>
                 </figure>
 
                 <div class="card-content">
 
                   <h3 class="h3">
-                    <a href="#" class="card-title">Cras accumsan nulla nec lacus ultricies placerat.</a>
+                    <a href="#" class="card-title">Sidang Skripsi Sarjana Kedokteran (S.KG)</a>
                   </h3>
 
                   <p class="card-text">
@@ -620,14 +741,14 @@
                   <div class="card-badge">
                     <ion-icon name="calendar-outline"></ion-icon>
 
-                    <time class="time" datetime="2022-03-24">24th March 2022</time>
+                    <time class="time" datetime="2022-03-24">2th May 2024</time>
                   </div>
                 </figure>
 
                 <div class="card-content">
 
                   <h3 class="h3">
-                    <a href="#" class="card-title">Dras accumsan nulla nec lacus ultricies placerat.</a>
+                    <a href="#" class="card-title">Ujian TA (Tahap Akhir)</a>
                   </h3>
 
                   <p class="card-text">
@@ -651,14 +772,45 @@
                   <div class="card-badge">
                     <ion-icon name="calendar-outline"></ion-icon>
 
-                    <time class="time" datetime="2022-03-24">24th March 2022</time>
+                    <time class="time" datetime="2022-03-24">9th June 2024</time>
                   </div>
                 </figure>
 
                 <div class="card-content">
 
                   <h3 class="h3">
-                    <a href="#" class="card-title">Seas accumsan nulla nec lacus ultricies placerat.</a>
+                    <a href="#" class="card-title">UKMP2DG</a>
+                  </h3>
+
+                  <p class="card-text">
+                    Curabitur sagittis libero tincidunt tempor finibus. Mauris at dignissim ligula, nec tristique orci.
+                  </p>
+
+                  <a href="#" class="card-link">Read More</a>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+
+                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                  <img src="./assets/images/blog-3.jpg" width="1180" height="800" loading="lazy"
+                    alt="Seas accumsan nulla nec lacus ultricies placerat." class="img-cover">
+
+                  <div class="card-badge">
+                    <ion-icon name="calendar-outline"></ion-icon>
+
+                    <time class="time" datetime="2024-06-09">9th June 2024</time>
+                  </div>
+                </figure>
+
+                <div class="card-content">
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">SUMPAH DOKTER</a>
                   </h3>
 
                   <p class="card-text">
@@ -695,7 +847,7 @@
 
         <div class="footer-brand">
 
-          <a href="#" class="logo">Dentelo.</a>
+          <a href="#" class="logo">Salsa Journey.</a>
 
           <p class="footer-text">
             Mauris non nisi semper, lacinia neque in, dapibus leo. Curabitur sagittis libero tincidunt tempor finibus.
@@ -723,7 +875,7 @@
           </li>
 
           <li>
-            <a href="#" class="footer-link">
+            <a href="#home" class="footer-link">
               <ion-icon name="add-outline"></ion-icon>
 
               <span class="span">Home</span>
@@ -731,7 +883,7 @@
           </li>
 
           <li>
-            <a href="#" class="footer-link">
+            <a href="#about" class="footer-link">
               <ion-icon name="add-outline"></ion-icon>
 
               <span class="span">About Us</span>
@@ -739,7 +891,7 @@
           </li>
 
           <li>
-            <a href="#" class="footer-link">
+            <a href="#service" class="footer-link">
               <ion-icon name="add-outline"></ion-icon>
 
               <span class="span">Services</span>
@@ -840,8 +992,8 @@
             </div>
 
             <address class="item-text">
-              1247/Plot No. 39, 15th Phase,<br>
-              LHB Colony, Kanpur
+              Fakultas Kedokteran Gigi,<br>
+              Universitas Prof. Dr. Moestopo (Beragama)
             </address>
           </li>
 
@@ -858,7 +1010,7 @@
               <ion-icon name="mail-outline"></ion-icon>
             </div>
 
-            <a href="mailto:help@example.com" class="footer-link">help@example.com</a>
+            <a href="mailto:ghinasalsas@gmail.com" class="footer-link">ghinasalsas@gmail.com</a>
           </li>
 
         </ul>
@@ -870,7 +1022,7 @@
       <div class="container">
 
         <p class="copyright">
-          &copy; 2022 All Rights Reserved by codewithsadee.
+          made with love <br> 🤍 Alam Wahyu 🤍
         </p>
 
         <ul class="social-list">
@@ -915,11 +1067,14 @@
 
 
 
-
   <!-- 
     - custom js link
   -->
   <script src="./assets/js/script.js" defer></script>
+  <script type="text/javascript">
+    
+
+  </script>
 
   <!-- 
     - ionicon link
