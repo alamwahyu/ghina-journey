@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dentelo - We Are Best Dental Service</title>
+  <title>Salsa Journey - drg. Ghina Salsabila, S.KG</title>
 
   <!-- 
     - favicon
@@ -28,65 +28,48 @@
 </head>
 
 <body id="top">
-
-  <audio id="background-music" src="nikmatiperjalanan.mp3" type="audio/mp3" autoplay loop></audio>
-
+  <audio id="background-music" src="nikmatiperjalanan.mp3" type="audio/mp3" preload="auto"></audio>
   <div class="button-container">
     <button style="background-image: url(./assets/images/play.png);" class="play-pause-btn" onclick="togglePlay(this)"></button>
-</div>
+  </div>
   <!-- 
     - #HEADER
   -->
-
   <header class="header">
-
     <div class="header-top">
       <div class="container">
-
         <ul class="contact-list">
-
           <li class="contact-item">
             <ion-icon name="mail-outline"></ion-icon>
-
-            <a href="mailto:info@example.com" class="contact-link">ghinasalsas@gmail.com</a>
+            <a href="mailto:ghinasalsas@gmail.com" class="contact-link">ghinasalsas@gmail.com</a>
           </li>
-
           <li class="contact-item">
             <ion-icon name="call-outline"></ion-icon>
-
             <a href="tel:+917052101786" class="contact-link">+91-7052-101-786</a>
           </li>
-
         </ul>
-
         <ul class="social-list">
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li>
-
           <li>
-            <a href="#" class="social-link">
+            <a href="https://www.instagram.com/ghinasalsas/" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
           </li>
-
           <li>
             <a href="#" class="social-link">
               <ion-icon name="logo-youtube"></ion-icon>
             </a>
           </li>
-
-        </ul>
-
+        </ul> 
       </div>
     </div>
 
@@ -103,7 +86,7 @@
             </li>
 
             <li>
-              <a href="#service" class="navbar-link" data-nav-link>Services</a>
+              <a href="#service" class="navbar-link" data-nav-link>Study</a>
             </li>
 
             <li>
@@ -180,7 +163,7 @@
                   xhr.open("GET", url);
                   xhr.send();
       
-                  alert("Thanks Greetings, "+name+".\nMessage sent to Telegram!");
+                  alert("Thanks Greetings, "+name+".\nWishes sent to Ghina Social Media!");
               });
           </script>
            <script type="module">
@@ -274,13 +257,13 @@
 
               <p class="section-subtitle">Thanku for your Greetings</p>
     
-              <h2 class="h2 section-title">Graduation Wish to drg. Ghina</h2>
+              <h2 class="h2 section-title">Graduation Wishes to drg. Ghina</h2>
     
               <a href="#name" class="btn">Belum ucapin ? Klik ini yah.</a>
     
             </div>
             <div class="cta-banner">
-              <ul id="message-list" style="margin-top: 100px; height: 300px;; overflow:auto;"></ul>
+              <ul id="message-list" style="margin-top: 100px; height: 500px;; overflow:auto;"></ul>
             </div>
 
         </div>
@@ -294,9 +277,9 @@
       <section class="section service" id="service" aria-label="service">
         <div class="container">
 
-          <p class="section-subtitle text-center">Our Services</p>
+          <p class="section-subtitle text-center">My Study</p>
 
-          <h2 class="h2 section-title text-center">My Impression of this</h2>
+          <h2 class="h2 section-title text-center">My Course Impression</h2>
 
           <ul class="service-list">
 
@@ -490,7 +473,7 @@
 
             <p class="section-subtitle">About Us</p>
 
-            <h2 class="h2 section-title">We Care For Your Dental Health</h2>
+            <h2 class="h2 section-title">Langkah Demi Langkah: Perjalanan Menuju Gelar Dokter Gigi</h2>
 
             <p class="section-text section-text-1">
               Aliquam ac sem et diam iaculis efficitur. Morbi in enim odio. Nullam quis volutpat est, sed dapibus
@@ -504,7 +487,23 @@
               Fusce elementum, augue in elementum porta, sapien nunc volutpat ex, a accumsan nunc lectus eu lectus.
             </p>
 
-            <a href="#" class="btn">Read more</a>
+            <a class="btn" id="myBtn" onclick="openModal(this)">Read more</a>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <span class="closemodal">&times;</span>
+                  <h2>Lanjutan ...</h2>
+                </div>
+                <div class="modal-body">
+                  <p>Aliquam erat volutpat. Aliquam enim massa, sagittis blandit ex mattis, ultricies posuere sapien. Morbi a
+                    dignissim enim.
+                    Fusce elementum, augue in elementum porta, sapien nunc volutpat ex, a accumsan nunc lectus eu lectus.
+                  </p>
+                </div>
+              </div>
 
           </div>
 
@@ -525,7 +524,7 @@
           <p class="section-subtitle text-center">Our Wishes</p>
 
           <h2 class="h2 section-title text-center">Best Person in Your Life </h2>
-
+          <p class="section-subtitle text-center">Swipe Left yah. -></p>
           <ul class="has-scrollbar">
 
             <li class="scrollbar-item">
@@ -648,11 +647,11 @@
 
               </div>
             </li>
-
           </ul>
-
         </div>
       </section>
+
+
 
 
 
@@ -682,10 +681,6 @@
 
         </div>
       </section>
-
-
-
-
 
       <!-- 
         - #BLOG
@@ -828,6 +823,24 @@
 
         </div>
       </section>
+
+      <section class="section cta" aria-label="cta">
+        <div class="container">
+
+          <div class="cta-content">
+
+            <p class="section-subtitle">Road to be Dentist</p>
+
+            <h2 class="h2 section-title">RECAP 2017 - 2024</h2>
+          </div>
+          <figure class="cta-banner">
+            <iframe id="my_youtube" width="560" height="425" class="w-100" src="https://www.youtube.com/embed/6wkyXKYgA1Y?si=u4in20s7x2GXebiE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+          </figure>
+
+        </div>
+      </section>
+      
 
     </article>
   </main>
