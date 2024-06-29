@@ -398,7 +398,7 @@ body {
 .text-center { text-align: center; }
 
 .card-text,
-.section-text { line-height: 1.7; }
+.section-text { line-height: 1.7; text-align: justify;}
 
 .img-holder {
   aspect-ratio: var(--width) / var(--height);
@@ -757,7 +757,7 @@ body {
 
 .blog-card .card-title:is(:hover, :focus) { color: var(--royal-blue-light); }
 
-.blog-card .card-text { margin-block: 15px; }
+.blog-card .card-text { margin-block: 15px; text-align: justify;}
 
 .blog-card .card-link {
   position: relative;
@@ -1489,4 +1489,7 @@ body {
   color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  padding: 2px 16px;
+  text-align: justify
+}
