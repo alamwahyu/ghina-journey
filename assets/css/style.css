@@ -523,6 +523,7 @@ body {
   font-size: var(--fs-6);
   line-height: 1.45;
   margin-block-end: 40px;
+  text-align: justify;
 }
 
 .hero-form {
