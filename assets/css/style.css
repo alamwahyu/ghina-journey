@@ -1486,11 +1486,18 @@ body {
 
 .modal-header {
   padding: 10px 16px;
-  background-color: var(--royal-blue-light);
+  background-image: linear-gradient( var(--deg, 90deg), var(--carolina-blue) 0%, var(--royal-blue-light) 100%);
   color: white;
 }
 
 .modal-body {
-  padding: 2px 16px;
+  padding: 15px;
   text-align: justify
+}
+
+.success {
+  background-color: #e7f3fe;
+  border-left: 6px solid var(--royal-blue-light);
+  padding: 15px;
+  margin-bottom: 20px;
 }

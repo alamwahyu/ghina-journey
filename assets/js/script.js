@@ -149,11 +149,11 @@ function timeAgo(date) {
             const now = new Date();
             const secondsPast = (now.getTime() - date.getTime()) / 1000;
             if (secondsPast < 60) {
-                return `${Math.round(secondsPast)} detik yang lalu.`;
+                return `${Math.round(secondsPast)} detik yang lalu`;
             } else if (secondsPast < 3600) {
-                return `${Math.round(secondsPast / 60)} menit yang lalu.`;
+                return `${Math.round(secondsPast / 60)} menit yang lalu`;
             } else if (secondsPast <= 86400) {
-                return `${Math.round(secondsPast / 3600)} jam yang lalu.`;
+                return `${Math.round(secondsPast / 3600)} jam yang lalu`;
             } else {
                 const day = date.getDate();
                 const month = date.toDateString().match(/ [a-zA-Z]*/)[0].trim();
@@ -193,6 +193,17 @@ function initializeModal() {
       if (event.target == modal) {
           closeModal();
       }
+  }
+}
+
+var i = 0;
+var txt = '"God Plans are the Best Plans."';
+var speed = 80;
+function typeWriter(){
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
   }
 }
 
