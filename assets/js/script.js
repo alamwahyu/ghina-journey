@@ -228,13 +228,13 @@ function initializeModal() {
   }
 }
 
-var i = 0;
+var j = 0;
 var txt = '"God Plans are the Best Plans."';
 var speed = 80;
 function typeWriter(){
-  if (i < txt.length) {
-    document.getElementById("demo").innerHTML += txt.charAt(i);
-    i++;
+  if (j < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(j);
+    j++;
     setTimeout(typeWriter, speed);
   }
 }
@@ -259,5 +259,40 @@ function showSlides() {
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
+// Set the date we're counting down to
+var countDownDate = new Date("August 12, 2024 06:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in elements with respective IDs
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("days").innerText = "0";
+    document.getElementById("hours").innerText = "0";
+    document.getElementById("minutes").innerText = "0";
+    document.getElementById("seconds").innerText = "0";
+  }
+}, 1000);
+
 // Initialize modal functionality when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initializeModal);
+

@@ -1585,3 +1585,48 @@ body {
   from {opacity: .4}
   to {opacity: 1}
 }
+
+/*COUNT DOWN*/
+.countdown-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.countdown-item {
+  background: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.number {
+  display: block;
+  font-size: 3rem;
+  color: var(--royal-blue-light);
+  font-weight: bold;
+}
+
+.label {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .countdown-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  .number {
+      font-size: 2.5rem;
+  }
+
+  .label {
+      font-size: 1rem;
+  }
+}
