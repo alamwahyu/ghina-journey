@@ -498,13 +498,33 @@
           <ul class="has-scrollbar">
 
             <li class="scrollbar-item">
+                                          <!-- <div class="doctor-card">
+                <div class="card-banner img-holder" style="--width: 460; --height: 500;">
+                  <img src="./assets/images/sircle.jpg" width="460" height="500" loading="lazy" alt="Vincent Cooper"
+                    class="img-cover">
+                    <div class="wishes">
+                      <video src="./video/larasmega.mp4" controls="true"></video>
+                      <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                    </div>
+                </div>
+                <h3 class="h3">
+                  <a onclick="toggle(event);" class="card-title">Laras, Fakya, Rani</a>
+                </h3>
+                <p class="card-subtitle">Teman Seperjuangan</p>
+                <ul class="card-social-list">
+                  <li>
+                    <a onclick="toggle(event);" class="btn">Watch Video
+                    </a>
+                  </li>
+                </ul>
+              </div> -->
               <div class="doctor-card">
 
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
                   <img src="./assets/images/ortu.jpg" width="460" height="500" loading="lazy" alt="Vincent Cooper"
                     class="img-cover">
                   <div class="wishes">
-                    <video src="./video/video1.mp4" controls="true"></video>
+                    <iframe src="https://www.youtube.com/embed/hNbnd811gDA?si=UHGmNxn_E5YGi8eR" frameborder="0" allowfullscreen></iframe>
                     <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
                   </div>
                 </div>
@@ -535,7 +555,7 @@
                   <img src="./assets/images/adik.jpg" width="460" height="500" loading="lazy" alt="Ella Thompson"
                     class="img-cover">
                     <div class="wishes">
-                      <video src="./video/video2.mp4" controls="true"></video>
+                      <iframe src="https://www.youtube.com/embed/hNbnd811gDA?si=UHGmNxn_E5YGi8eR" frameborder="0" allowfullscreen></iframe>
                       <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
                     </div>
                 </div>
@@ -560,32 +580,23 @@
 
             <li class="scrollbar-item">
               <div class="doctor-card">
-
                 <div class="card-banner img-holder" style="--width: 460; --height: 500;">
-                  <img src="./assets/images/sircle.jpg" width="460" height="500" loading="lazy" alt="Vincent Cooper"
-                    class="img-cover">
+                    <img src="./assets/images/sircle.jpg" width="460" height="500" loading="lazy" alt="Vincent Cooper" class="img-cover">
                     <div class="wishes">
-                      <video src="./video/larasmega.mp4" controls="true"></video>
-                      <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
+                        <iframe src="https://www.youtube.com/embed/hNbnd811gDA?si=UHGmNxn_E5YGi8eR" frameborder="0" allowfullscreen></iframe>
+                        <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
                     </div>
                 </div>
-
                 <h3 class="h3">
-                  <a onclick="toggle(event);" class="card-title">Laras, Fakya, Rani</a>
+                    <a onclick="toggle(event);" class="card-title">Teman Sejawat</a>
                 </h3>
-
                 <p class="card-subtitle">Teman Seperjuangan</p>
-
                 <ul class="card-social-list">
-
-                  <li>
-                    <a onclick="toggle(event);" class="btn">Watch Video
-                    </a>
-                  </li>
-
+                    <li>
+                        <a onclick="toggle(event);" class="btn">Watch Video</a>
+                    </li>
                 </ul>
-
-              </div>
+            </div>
             </li>
 
             <li class="scrollbar-item">
@@ -595,7 +606,7 @@
                   <img src="./assets/images/alamw3.jpg" width="460" height="500" loading="lazy" alt="Danielle Bryant"
                     class="img-cover">
                     <div class="wishes">
-                      <video src="./video/video4.mp4" controls="true"></video>
+                      <iframe src="https://www.youtube.com/embed/hNbnd811gDA?si=UHGmNxn_E5YGi8eR" frameborder="0" allowfullscreen></iframe>
                       <img src="./assets/images/close.png" class="close" onclick="toggle(event);">
                     </div>
                 </div>
@@ -849,11 +860,56 @@
         </div>
       </section>
 
+      <section class="section cta" aria-label="cta" style="padding-top: 50px;">
+        <div class="container">
+          <h2 class="h2 section-title text-center">My Gallery</h2>
+          <div class="slideshow-container">
+            <!-- Full-idth images with number and caption text -->
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 4</div>
+              <img src="./assets/images/skg.jpg" style="width:100%">
+              <div class="text">Sarjana Kedokteran Gigi Moment</div>
+            </div>
+          
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 3</div>
+              <img src="./assets/images/koas.jpeg" style="width:100%">
+              <div class="text">Co-Assistant Moment</div>
+            </div>
+          
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 4</div>
+              <img src="./assets/images/TA.jpg" style="width:100%">
+              <div class="text">Ujian TA Moment</div>
+            </div>
+
+            <div class="mySlides fade">
+              <div class="numbertext">4 / 4</div>
+              <img src="./assets/images/ukmp.jpg" style="width:100%">
+              <div class="text">UKMP2DG Moment</div>
+            </div>
+          
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <br>
+          
+          <!-- The dots/circles -->
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+          </div>
+        </div>
+      </section>
+
       <!-- 
         - #RECAP
       -->
 
-      <section class="section blog" id="recap" aria-label="blog" style="padding-top: 5px;">
+      <section class="section blog" id="recap" aria-label="blog">
         <div class="container">
           <p class="section-subtitle text-center">Journey Moment</p>
           <h2 class="h2 section-title text-center">Recap to be Dentist</h2>

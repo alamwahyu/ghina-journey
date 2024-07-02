@@ -67,36 +67,68 @@ const closeNav = function () {
 
 addEventOnElem(navbarLinks, "click", closeNav);
 
-function toggle(event){
+// function toggle(event){
+//   const button = document.querySelector("button");
+
+//   // Prevent default link behavior
+  
+//   event.preventDefault();
+//   event.stopPropagation();
+
+//   // Get the closest parent element with the class 'doctor-card'
+//   var doctorCard = event.currentTarget.closest('.doctor-card');
+//   var wishes = doctorCard.querySelector(".wishes");
+//   var video = wishes.querySelector("video");
+  
+//   // Toggle the active class on the wishes container
+//   wishes.classList.toggle("active");
+  
+//   // Pause the video and reset its current time if the wishes container is not active
+//   if (!wishes.classList.contains("active")) {
+//     video.pause();
+//     video.currentTime = 0;
+//   }
+//   if (audio.paused) {
+//     audio.play();
+//     button.style.backgroundImage = "url('./assets/images/music.png')";
+//     button.classList.add('rotating');
+//    }else{
+//     audio.pause();
+//     button.style.backgroundImage = "url('./assets/images/play.png')";
+//     button.classList.remove('rotating');
+//    }
+// }
+
+function toggle(event) {
   const button = document.querySelector("button");
 
   // Prevent default link behavior
-  
   event.preventDefault();
   event.stopPropagation();
 
   // Get the closest parent element with the class 'doctor-card'
   var doctorCard = event.currentTarget.closest('.doctor-card');
   var wishes = doctorCard.querySelector(".wishes");
-  var video = wishes.querySelector("video");
-  
+  var iframe = wishes.querySelector("iframe");
+
   // Toggle the active class on the wishes container
   wishes.classList.toggle("active");
-  
+
   // Pause the video and reset its current time if the wishes container is not active
   if (!wishes.classList.contains("active")) {
-    video.pause();
-    video.currentTime = 0;
+      var src = iframe.src;
+      iframe.src = src; // This will reload the iframe to stop the video
   }
+
   if (audio.paused) {
-    audio.play();
-    button.style.backgroundImage = "url('./assets/images/music.png')";
-    button.classList.add('rotating');
-   }else{
-    audio.pause();
-    button.style.backgroundImage = "url('./assets/images/play.png')";
-    button.classList.remove('rotating');
-   }
+      audio.play();
+      button.style.backgroundImage = "url('./assets/images/music.png')";
+      button.classList.add('rotating');
+  } else {
+      audio.pause();
+      button.style.backgroundImage = "url('./assets/images/play.png')";
+      button.classList.remove('rotating');
+  }
 }
 
 /**
@@ -205,6 +237,26 @@ function typeWriter(){
     i++;
     setTimeout(typeWriter, speed);
   }
+}
+
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 
 // Initialize modal functionality when the DOM is fully loaded
